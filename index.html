@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Jesper Tegnér | Artificial Intelligence and Computational Medicine</title>
+
+  <meta
+    name="description"
+    content="Jesper Tegnér is Professor and Associate Dean at KAUST, working across artificial intelligence, bioinformatics, computational medicine, and translational research."
+  >
+
+  <style>
+    :root {
+      --navy: #071a2b;
+      --navy-light: #102b42;
+      --teal: #38c6b4;
+      --teal-dark: #168f84;
+      --cream: #f5f2ea;
+      --white: #ffffff;
+      --ink: #17212b;
+      --muted: #5e6b76;
+      --line: #dbe2e6;
+      --surface: #f8fafb;
+      --max-width: 1160px;
+      --radius: 22px;
+      --shadow: 0 24px 70px rgba(7, 26, 43, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family:
+        Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 20px;
+      z-index: 1000;
+      padding: 10px 16px;
+      color: var(--navy);
+      background: var(--white);
+      border-radius: 8px;
+    }
+
+    .skip-link:focus {
+      top: 20px;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: var(--white);
+    }
+
+    .navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 88px;
+    }
+
+    .brand {
+      color: var(--white);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--teal);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 760px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 82% 20%, rgba(56, 198, 180, 0.2), transparent 31%),
+        linear-gradient(135deg, var(--navy) 0%, #0a263d 58%, #123c52 100%);
+      isolation: isolate;
+    }
+
+    .hero::before {
+      position: absolute;
+      z-index: -1;
+      right: -150px;
+      bottom: -280px;
+      width: 720px;
+      height: 720px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 90px rgba(255, 255, 255, 0.025),
+        0 0 0 180px rgba(255, 255, 255, 0.018);
+      content: "";
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: clamp(50px, 8vw, 110px);
+      align-items: center;
+      padding-top: 145px;
+      padding-bottom: 85px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 24px;
+      color: var(--teal);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 42px;
+      height: 2px;
+      background: var(--teal);
+      content: "";
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.12;
+    }
+
+    h1 {
+      max-width: 740px;
+      margin-bottom: 28px;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 500;
+      letter-spacing: -0.055em;
+    }
+
+    .hero-summary {
+      max-width: 720px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 40px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 23px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition:
+        transform 160ms ease,
+        background 160ms ease,
+        border-color 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: var(--navy);
+      background: var(--teal);
+    }
+
+    .button-secondary {
+      color: var(--white);
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .portrait-frame {
+      position: relative;
+      width: min(100%, 430px);
+      margin-left: auto;
+    }
+
+    .portrait-frame::before {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 72%;
+      height: 72%;
+      border: 1px solid rgba(56, 198, 180, 0.55);
+      border-radius: var(--radius);
+      content: "";
+    }
+
+    .portrait-frame img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius);
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+
+    .portrait-label {
+      position: absolute;
+      z-index: 2;
+      right: -18px;
+      bottom: 30px;
+      padding: 14px 19px;
+      color: var(--navy);
+      background: var(--cream);
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 105px 0;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 55px;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      color: var(--navy);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      max-width: 670px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .about {
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(290px, 0.85fr);
+      gap: 70px;
+    }
+
+    .about-copy p {
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-size: 1.08rem;
+    }
+
+    .about-copy p:first-child {
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.45rem, 2.5vw, 2rem);
+      line-height: 1.45;
+    }
+
+    .facts {
+      display: grid;
+      gap: 1px;
+      align-self: start;
+      overflow: hidden;
+      background: rgba(7, 26, 43, 0.14);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .fact {
+      padding: 24px;
+      background: var(--white);
+    }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--teal-dark);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .fact span {
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.22rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .research {
+      background: var(--white);
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .research-card {
+      min-height: 255px;
+      padding: 30px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .research-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(22, 143, 132, 0.5);
+      box-shadow: 0 18px 45px rgba(7, 26, 43, 0.1);
+    }
+
+    .card-number {
+      display: block;
+      margin-bottom: 42px;
+      color: var(--teal-dark);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .research-card h3 {
+      margin-bottom: 14px;
+      color: var(--navy);
+      font-size: 1.35rem;
+    }
+
+    .research-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .career {
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .career .section-heading h2 {
+      color: var(--white);
+    }
+
+    .career .section-heading p {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin-left: auto;
+    }
+
+    .timeline::before {
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 8px;
+      width: 1px;
+      background: rgba(56, 198, 180, 0.42);
+      content: "";
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 30px;
+      padding: 0 0 48px 42px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      position: absolute;
+      top: 8px;
+      left: 2px;
+      width: 13px;
+      height: 13px;
+      background: var(--teal);
+      border: 4px solid var(--navy);
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px var(--teal);
+      content: "";
+    }
+
+    .timeline-year {
+      color: var(--teal);
+      font-weight: 800;
+    }
+
+    .timeline-content h3 {
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+
+    .timeline-content p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .achievements {
+      background: var(--cream);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 34px;
+    }
+
+    .metric {
+      padding: 35px;
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(7, 26, 43, 0.07);
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      line-height: 1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .achievement-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      background: rgba(7, 26, 43, 0.13);
+      border-radius: 18px;
+    }
+
+    .achievement-list div {
+      position: relative;
+      padding: 25px 28px 25px 54px;
+      background: var(--white);
+    }
+
+    .achievement-list div::before {
+      position: absolute;
+      top: 31px;
+      left: 28px;
+      width: 9px;
+      height: 9px;
+      background: var(--teal);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .publications {
+      background: var(--white);
+    }
+
+    .publication-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: publications;
+      border-top: 1px solid var(--line);
+    }
+
+    .publication {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 72px;
+      gap: 18px;
+      align-items: start;
+      padding: 25px 4px;
+      border-bottom: 1px solid var(--line);
+      counter-increment: publications;
+    }
+
+    .publication::before {
+      color: var(--teal-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      content: counter(publications, decimal-leading-zero);
+    }
+
+    .publication-title {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .publication-venue {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .publication-year {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .site-footer {
+      padding: 55px 0;
+      color: rgba(255, 255, 255, 0.62);
+      background: #04111d;
+    }
+
+    .footer-inner {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-name {
+      margin: 0 0 5px;
+      color: var(--white);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .footer-copy {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .back-to-top {
+      color: var(--teal);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--teal);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .section-heading,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        padding-top: 135px;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .portrait-frame {
+        width: min(78vw, 420px);
+        margin: 20px auto 0;
+      }
+
+      .section-heading {
+        gap: 20px;
+      }
+
+      .research-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      section {
+        padding: 76px 0;
+      }
+
+      .navigation {
+        min-height: 74px;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links li:nth-child(2),
+      .nav-links li:nth-child(3) {
+        display: none;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 17vw, 4.6rem);
+      }
+
+      .hero-grid {
+        gap: 60px;
+        padding-top: 120px;
+        padding-bottom: 75px;
+      }
+
+      .portrait-label {
+        right: -8px;
+      }
+
+      .research-grid,
+      .metrics,
+      .achievement-list {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .publication {
+        grid-template-columns: 35px 1fr;
+      }
+
+      .publication-year {
+        grid-column: 2;
+        text-align: left;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container navigation">
+      <a class="brand" href="#top">Jesper Tegnér</a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#career">Career</a></li>
+          <li><a href="#publications">Publications</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">AI · Medicine · Life Sciences</p>
+
+          <h1 id="hero-title">Jesper Tegnér</h1>
+
+          <p class="hero-summary">
+            Professor and Associate Dean in the Biomedical Sciences Division
+            at KAUST, advancing artificial intelligence, bioinformatics,
+            computational medicine, and translational research.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#about">Explore profile</a>
+            <a class="button button-secondary" href="#publications">
+              Recent publications
+            </a>
+          </div>
+        </div>
+
+        <figure class="portrait-frame">
+          <img
+            src="Tegner-Jesper-Headshot.png"
+            alt="Portrait of Jesper Tegnér"
+            width="512"
+            height="512"
+          >
+          <figcaption class="portrait-label">
+            Professor · Scientist · Founder
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="about-title">About</h2>
+
+          <p>
+            A multidisciplinary academic career connecting mathematical
+            science, medicine, biology, and artificial intelligence.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>
+              Jesper Tegnér is Professor and Associate Dean in the Biomedical
+              Sciences Division at King Abdullah University of Science and
+              Technology.
+            </p>
+
+            <p>
+              He is affiliated with the Bioscience, Computer Science,
+              Bioengineering, and Statistics programs at KAUST. His research
+              and teaching span bioinformatics, artificial intelligence,
+              computational biology, and technologies for life sciences and
+              medical research.
+            </p>
+
+            <p>
+              He holds an MD and a PhD in Experimental and Computational
+              Neuroscience from Karolinska Institutet. His education also
+              encompasses mathematics, theoretical physics, medicine,
+              philosophy, psychology, and postgraduate studies in pure and
+              applied computational mathematics.
+            </p>
+
+            <p>
+              Alongside his academic work, he has founded two biotechnology
+              startups and serves as Executive Director at Immune
+              Algorithmics.
+            </p>
+          </div>
+
+          <aside class="facts" aria-label="Profile highlights">
+            <div class="fact">
+              <strong>Current position</strong>
+              <span>Professor and Associate Dean at KAUST</span>
+            </div>
+
+            <div class="fact">
+              <strong>Core disciplines</strong>
+              <span>Artificial intelligence and computational medicine</span>
+            </div>
+
+            <div class="fact">
+              <strong>Education</strong>
+              <span>MD and PhD from Karolinska Institutet</span>
+            </div>
+
+            <div class="fact">
+              <strong>Entrepreneurship</strong>
+              <span>Founder of two biotechnology startups</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="research" id="research" aria-labelledby="research-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="research-title">Research</h2>
+
+          <p>
+            Developing computational approaches that connect data,
+            mechanistic knowledge, and clinical questions across biological
+            scales.
+          </p>
+        </div>
+
+        <div class="research-grid">
+          <article class="research-card">
+            <span class="card-number">01</span>
+            <h3>Artificial Intelligence</h3>
+            <p>
+              Interpretable and multimodal AI systems for scientific
+              discovery and biomedical research.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <span class="card-number">02</span>
+            <h3>Bioinformatics</h3>
+            <p>
+              Computational methods for understanding complex biological
+              systems and high-dimensional data.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <span class="card-number">03</span>
+            <h3>Spatial Biology</h3>
+            <p>
+              Machine-learning approaches for spatial transcriptomics,
+              cellular organization, and tissue biology.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <span class="card-number">04</span>
+            <h3>Translational Medicine</h3>
+            <p>
+              Connecting computational insight with disease mechanisms,
+              therapeutic response, and clinical research.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="career" id="career" aria-labelledby="career-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="career-title">Career</h2>
+
+          <p>
+            Academic leadership across computer science, computational
+            biology, molecular medicine, and biomedical sciences.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-year">1997</div>
+            <div class="timeline-content">
+              <h3>Early academic appointment</h3>
+              <p>
+                Following completion of his MD and PhD, appointed Assistant
+                Professor in Computer Science.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">1997–2001</div>
+            <div class="timeline-content">
+              <h3>Visiting scientist</h3>
+              <p>
+                Visiting Scientist in Boston as a five-year Wennergren Fellow
+                and an Alfred P. Sloan Fellow.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">2002–2010</div>
+            <div class="timeline-content">
+              <h3>Computational biology leadership</h3>
+              <p>
+                Chaired Full Professor and Head of the Division of
+                Computational Biology in the Department of Physics.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">2010–2021</div>
+            <div class="timeline-content">
+              <h3>Computational medicine</h3>
+              <p>
+                Director and holder of a lifetime-named Strategic Chaired
+                Professorship in Computational Medicine at the Center for
+                Molecular Medicine, Karolinska Institutet and Karolinska
+                University Hospital.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">Since 2016</div>
+            <div class="timeline-content">
+              <h3>King Abdullah University of Science and Technology</h3>
+              <p>
+                Professor at KAUST and currently Professor and Associate Dean
+                in the Biomedical Sciences Division.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="achievements"
+      id="achievements"
+      aria-labelledby="achievements-title"
+    >
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="achievements-title">Highlights</h2>
+
+          <p>
+            Recognition spanning research excellence, scientific
+            competitions, academic leadership, and teaching.
+          </p>
+        </div>
+
+        <div class="metrics" aria-label="Publication metrics">
+          <div class="metric">
+            <strong>≈400</strong>
+            <span>Research papers</span>
+          </div>
+
+          <div class="metric">
+            <strong>&gt;20,000</strong>
+            <span>Citations</span>
+          </div>
+
+          <div class="metric">
+            <strong>&gt;70</strong>
+            <span>H-index</span>
+          </div>
+        </div>
+
+        <div class="achievement-list">
+          <div>ERC co-investigator</div>
+          <div>Named SciLifeLab Faculty</div>
+          <div>Fellow of the European Society for Preventive Medicine</div>
+          <div>Finalist for the Göran Gustafsson Prize in Mathematics</div>
+          <div>Winner of the DREAM system-identification competition</div>
+          <div>Winner of two NeurIPS Single Cell Challenge tasks</div>
+          <div>KAUST Academic Faculty Speaker at Convocation</div>
+          <div>Finalist for the KAUST Best Teaching Award</div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="publications"
+      id="publications"
+      aria-labelledby="publications-title"
+    >
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="publications-title">Selected publications</h2>
+
+          <p>
+            Recent work across artificial intelligence, spatial
+            transcriptomics, genomics, immunology, and systems biology.
+          </p>
+        </div>
+
+        <ol class="publication-list">
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Stromal and endothelial transcriptional changes during
+                progression from MGUS to myeloma and after treatment response
+              </span>
+              <span class="publication-venue">Nature Communications</span>
+            </div>
+            <span class="publication-year">2026</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Benchmarking Segmentation Methods for Spatial Transcriptomics
+              </span>
+              <span class="publication-venue">Nature Methods</span>
+            </div>
+            <span class="publication-year">2026</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Unify learns cellular evolution with universal multimodal
+                embeddings
+              </span>
+              <span class="publication-venue">Nature Communications</span>
+            </div>
+            <span class="publication-year">2026</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Human growth plates house resting zone sub-populations with
+                features of quiescent stem cells
+              </span>
+              <span class="publication-venue">Bone Research</span>
+            </div>
+            <span class="publication-year">2026</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Predicting and interpreting cell-type specific drug responses
+                in the low data regime using inductive priors
+              </span>
+              <span class="publication-venue">
+                Nature Machine Intelligence
+              </span>
+            </div>
+            <span class="publication-year">2026</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                The future of fundamental science led by generative
+                closed-loop artificial intelligence
+              </span>
+              <span class="publication-venue">
+                Frontiers in Artificial Intelligence
+              </span>
+            </div>
+            <span class="publication-year">2026</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Multimodal Foundation Transformer Models for Multiscale
+                Genomics
+              </span>
+              <span class="publication-venue">Nature Methods</span>
+            </div>
+            <span class="publication-year">2026</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Data meets prior knowledge for interpretable mechanistic
+                inference in biology: Recovering biological networks
+              </span>
+              <span class="publication-venue">
+                Nature Machine Intelligence
+              </span>
+            </div>
+            <span class="publication-year">2025</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                NLRP3-mediated glutaminolysis controls microglial phagocytosis
+                to promote Alzheimer’s disease progression
+              </span>
+              <span class="publication-venue">Immunity</span>
+            </div>
+            <span class="publication-year">2025</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Leveraging network motifs to improve artificial neural
+                networks
+              </span>
+              <span class="publication-venue">Nature Communications</span>
+            </div>
+            <span class="publication-year">2025</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Uncovering the regulatory landscape of early human B-cell
+                lymphopoiesis and its implications in the pathogenesis of
+                B-ALL
+              </span>
+              <span class="publication-venue">Science Advances</span>
+            </div>
+            <span class="publication-year">2025</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                Exploring the role of large language models in the scientific
+                method: From Hypothesis to Discovery
+              </span>
+              <span class="publication-venue">
+                npj Artificial Intelligence
+              </span>
+            </div>
+            <span class="publication-year">2025</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                TACTIC: An explainable multi-agent architecture for
+                classification and interpretable reasoning in spatial
+                transcriptomics
+              </span>
+              <span class="publication-venue">
+                International Conference on Machine Learning
+              </span>
+            </div>
+            <span class="publication-year">2025</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                SPELL: Spatial prompting with chain-of-thought for zero-shot
+                learning in spatial transcriptomics
+              </span>
+              <span class="publication-venue">
+                International Conference on Learning Representations
+              </span>
+            </div>
+            <span class="publication-year">2025</span>
+          </li>
+
+          <li class="publication">
+            <div>
+              <span class="publication-title">
+                stDiffusion: A diffusion-based model for generative spatial
+                transcriptomics
+              </span>
+              <span class="publication-venue">
+                International Conference on Learning Representations
+              </span>
+            </div>
+            <span class="publication-year">2025</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-name">Jesper Tegnér</p>
+        <p class="footer-copy">
+          © <span id="current-year"></span> Jesper Tegnér
+        </p>
+      </div>
+
+      <a class="back-to-top" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("current-year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
